@@ -1,10 +1,20 @@
 import { signOut } from "@/auth";
-import { User } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-export const LoggedUser = ({ user }: { user: User }) => {
+type LoggedUserProps = {
+  user: {
+    id: string | undefined;
+    firstName: string | undefined;
+    lastName: string | undefined;
+    fullName: string | null | undefined;
+    email: string | null | undefined;
+    image: string | null | undefined;
+  };
+};
+
+export const LoggedUser = ({ user }: LoggedUserProps) => {
   return (
     <>
       <Link href="/startup/create">
@@ -23,7 +33,7 @@ export const LoggedUser = ({ user }: { user: User }) => {
         </button>
       </form>
       <Link href={`/user/${user.id}`}>
-        <span>{user.name}</span>
+        <span>{user.firstName}</span>
       </Link>
       <Image
         alt="user-image"
