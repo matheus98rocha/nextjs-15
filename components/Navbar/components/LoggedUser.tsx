@@ -33,15 +33,14 @@ export const LoggedUser = ({ user }: LoggedUserProps) => {
         </button>
       </form>
       <Link href={`/user/${user.id}`}>
-        <span>{user.firstName}</span>
+        <Image
+          alt="user-image"
+          src={user.image as string}
+          width={30}
+          height={30}
+          className="rounded-full"
+        />
       </Link>
-      <Image
-        alt="user-image"
-        src={user.image as string}
-        width={30}
-        height={30}
-        className="rounded-full"
-      />
     </>
   );
 };
