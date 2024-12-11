@@ -32,7 +32,7 @@ export default async function Home({ searchParams }: HomeProps) {
         highlightText="PITCH, VOTE, AND GROW"
         headingText="Pitch your startup"
       >
-        <p className="sub-heading !max-w-3xl">
+        <p className="sub-heading !max-w-3xl fade-in-bottom-500">
           Submit Ideas, Vote on Pitches, and Get Noticed in Virtual Competitions
         </p>
         <SearchForm query={query} />

@@ -2609,7 +2609,12 @@ tailwindcss-animate@^1.0.7:
   resolved "https://ab-inbev.pkgs.visualstudio.com/GHQ_B2B_Delta/_packaging/admin-portal-shared-services/npm/registry/tailwindcss-animate/-/tailwindcss-animate-1.0.7.tgz"
   integrity sha1-MYtpLExCZ2zJ5nsZt4d1dCOIvvQ=
 
-tailwindcss@^3.4.1, "tailwindcss@>=3.0.0 || insiders", "tailwindcss@>=3.0.0 || insiders || >=4.0.0-alpha.20":
+tailwindcss-animated@^1.1.2:
+  version "1.1.2"
+  resolved "https://ab-inbev.pkgs.visualstudio.com/GHQ_B2B_Delta/_packaging/admin-portal-shared-services/npm/registry/tailwindcss-animated/-/tailwindcss-animated-1.1.2.tgz"
+  integrity sha1-zIqr5bNxq98goZWAl4Wz2/NK3NU=
+
+tailwindcss@^3.4.1, "tailwindcss@>=3.0.0 || insiders", "tailwindcss@>=3.0.0 || insiders || >=4.0.0-alpha.20", tailwindcss@>=3.1.0:
   version "3.4.16"
   resolved "https://ab-inbev.pkgs.visualstudio.com/GHQ_B2B_Delta/_packaging/admin-portal-shared-services/npm/registry/tailwindcss/-/tailwindcss-3.4.16.tgz"
   integrity sha1-NafDAwhE1gAPwnGHjbQJa2qNLsk=

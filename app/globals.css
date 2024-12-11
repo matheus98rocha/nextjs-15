@@ -184,6 +184,26 @@
   .tag-tri {
     @apply before:content-[''] before:absolute before:top-2 before:left-2 before:border-t-[10px] before:border-t-black before:border-r-[10px] before:border-r-transparent after:content-[''] after:absolute after:bottom-2 after:right-2 after:border-b-[10px] after:border-b-black after:border-l-[10px] after:border-l-transparent;
   }
+
+  .fade-in-bottom {
+    @apply animate-fade-up animate-delay-0 animate-ease-in-out;
+  }
+
+  .fade-in-bottom-150 {
+    @apply animate-fade-up animate-delay-150 animate-ease-in-out;
+  }
+
+  .fade-in-bottom-300 {
+    @apply animate-fade-up animate-delay-300 animate-ease-in-out;
+  }
+
+  .fade-in-bottom-500 {
+    @apply animate-fade-up animate-delay-500 animate-ease-in-out;
+  }
+
+  .fade-in-bottom-700 {
+    @apply animate-fade-up animate-delay-700 animate-ease-in-out;
+  }
 }
 
 .w-md-editor-toolbar {

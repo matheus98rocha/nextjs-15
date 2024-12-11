@@ -9,7 +9,7 @@ type SearchForm = {
 
 export const SearchForm = ({ query }: SearchForm) => {
   return (
-    <Form action={"/"} className="search-form">
+    <Form action={"/"} className="search-form fade-in-bottom-700">
       <input
         name="query"
         defaultValue={query}
