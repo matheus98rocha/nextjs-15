@@ -5,10 +5,9 @@ import Link from "next/link";
 import { auth } from "@/auth";
 
 import { useUser } from "./Navbar.hooks";
-import { LoggedUser } from "./components/LoggedUser";
-import { NotLoggedUser } from "./components/NotLoggedUser";
+import { LoggedUser, NotLoggedUser } from "./components";
 
-const Navbar = async () => {
+export const Navbar = async () => {
   const session = await auth();
   const { isUserLoggedIn, user } = useUser(session);
 
@@ -26,5 +25,3 @@ const Navbar = async () => {
     </div>
   );
 };
-
-export default Navbar;

@@ -1,7 +1,7 @@
 import React from "react";
 import Form from "next/form";
 
-const SearchForm = () => {
+export const SearchForm = () => {
   const query = "Test";
 
   const handleResetTextField = () => {
@@ -23,5 +23,3 @@ const SearchForm = () => {
     </Form>
   );
 };
-
-export default SearchForm;
