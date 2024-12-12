@@ -30,7 +30,7 @@ export const StartupCard = ({ post }: StartupCardProps) => {
     views,
   } = post;
   return (
-    <li className="startup-card group">
+    <li className="startup-card group fade-in-bottom">
       <div className="flex-between">
         <p className="startup_card_date">{formatDate(_createdAt)}</p>
         <div className="flex gap-1.5">

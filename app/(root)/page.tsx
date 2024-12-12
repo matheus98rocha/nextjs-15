@@ -38,7 +38,7 @@ export default async function Home({ searchParams }: HomeProps) {
         <SearchForm query={query} />
       </HeroSection>
       <section className="section_container">
-        <p className="text-30-semibold">
+        <p className="text-30-semibold fade-in-bottom">
           {query ? `Search Results for: ${query}` : "All Startups"}
         </p>
         <ul className="mt-7 card_grid">
