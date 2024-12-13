@@ -6,6 +6,7 @@ import {
 } from "@/components/StartupCard/StartupCard";
 import { STARTUPS_QUERY } from "@/sanity/lib/queries";
 import { sanityFetch, SanityLive } from "@/lib/live";
+import { client } from "@/sanity/lib/client";
 
 type HomeProps = {
   searchParams: Promise<{ query?: string }>;
@@ -13,11 +14,11 @@ type HomeProps = {
 
 export default async function Home({ searchParams }: HomeProps) {
   const query = (await searchParams).query;
-
+  const params = { search: query || null };
   const { data: posts } = await sanityFetch({
     query: STARTUPS_QUERY,
+    params,
   });
-
   return (
     <div>
       <HeroSection

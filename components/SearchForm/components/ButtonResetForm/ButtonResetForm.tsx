@@ -4,15 +4,9 @@ import { X } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
-type ButtonResetFormProps = {
-  querySelectorForm: string;
-};
-
-export const ButtonResetForm = ({
-  querySelectorForm,
-}: ButtonResetFormProps) => {
+export const ButtonResetForm = () => {
   const handleResetForm = () => {
-    const form = document.querySelector(querySelectorForm) as HTMLFormElement;
+    const form = document.querySelector("#search-form") as HTMLFormElement;
 
     if (form) form.reset();
   };
