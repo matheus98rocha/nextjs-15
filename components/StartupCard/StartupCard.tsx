@@ -6,9 +6,9 @@ import React from "react";
 import { Button } from "../ui";
 import { Author, Startup } from "@/sanity/types";
 
-export type StartupTypeCard = Omit<Startup, "author"> & { author?: Author };
+export type StartupType = Omit<Startup, "author"> & { author?: Author };
 
-export const StartupCard = ({ post }: { post: StartupTypeCard }) => {
+export const StartupCard = ({ post }: { post: StartupType }) => {
   const {
     _createdAt,
     views,

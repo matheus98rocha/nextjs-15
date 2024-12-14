@@ -1,9 +1,6 @@
 import { HeroSection } from "@/components/HeroSection/HeroSection";
 import { SearchForm } from "../../components/SearchForm/SearchForm";
-import {
-  StartupCard,
-  StartupTypeCard,
-} from "@/components/StartupCard/StartupCard";
+import { StartupCard, StartupType } from "@/components/StartupCard/StartupCard";
 import { STARTUPS_QUERY } from "@/sanity/lib/queries";
 import { sanityFetch, SanityLive } from "@/lib/live";
 import { client } from "@/sanity/lib/client";
@@ -36,7 +33,7 @@ export default async function Home({ searchParams }: HomeProps) {
         </p>
         <ul className="mt-7 card_grid">
           {posts.length > 0 ? (
-            posts.map((post: StartupTypeCard) => (
+            posts.map((post: StartupType) => (
               <StartupCard key={post._id} post={post} />
             ))
           ) : (

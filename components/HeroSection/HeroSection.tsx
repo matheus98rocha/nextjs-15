@@ -7,7 +7,7 @@ export const HeroSection = ({
   children,
 }: HeroSextionProps) => {
   return (
-    <section className="animate-in fade-in w-full bg-primary min-h-[530px] flex justify-center items-center flex-col sm:py-10 sm:px-6 py-0 px-0">
+    <section className="animate-in fade-in w-screen bg-gradient-to-b from-primary to-pink-600 min-h-[530px] flex justify-center items-center flex-col py-10 px-6">
       {!!highlightText === true && (
         <h1 className="fade-in-bottom-150 bg-secondary px-6 py-3 font-work-sans font-bold rounded-sm uppercase relative tag-tri">
           {highlightText}

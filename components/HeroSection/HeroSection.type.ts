@@ -1,5 +1,5 @@
 export type HeroSextionProps = {
   highlightText?: string;
   headingText: string;
-  children?: React.ReactNode[];
+  children?: React.ReactNode;
 };
