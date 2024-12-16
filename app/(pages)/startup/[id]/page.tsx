@@ -62,6 +62,7 @@ const Page = async ({ params }: StartupProps) => {
                 width={64}
                 height={64}
                 alt="avatar"
+                loading="lazy"
               />
               <div>
                 <p className="text-20-medium">{startup.author?.name}</p>
@@ -86,7 +87,7 @@ const Page = async ({ params }: StartupProps) => {
         </div>
         <hr className="divider" />
       </section>
-      <Suspense fallback={<Skeleton className="view-skeleton" />}>
+      <Suspense fallback={<Skeleton className="view_skeleton" />}>
         <Views id={id} />
       </Suspense>
     </>

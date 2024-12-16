@@ -45,6 +45,7 @@ export const StartupCard = ({ post }: { post: StartupType }) => {
             width={48}
             height={48}
             className="rounded-full"
+            loading="lazy"
           />
         </Link>
       </div>

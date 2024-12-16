@@ -56,6 +56,7 @@ export const LoggedUser = ({ user }: LoggedUserProps) => {
             width={30}
             height={30}
             className="rounded-full"
+            loading="lazy"
           />
         </PopoverTrigger>
       </Popover>

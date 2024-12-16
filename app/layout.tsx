@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import "easymde/dist/easymde.min.css";
+import NextTopLoader from "nextjs-toploader";
 
 const workSans = localFont({
   src: [
@@ -62,6 +63,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${workSans.variable} ${workSans.variable} antialiased`}>
+        <NextTopLoader
+          color="#EE2B69"
+          shadow="0 0 10px #EE2B69,0 0 5px #EE2B69"
+          showSpinner={false}
+        />
         {children}
       </body>
     </html>

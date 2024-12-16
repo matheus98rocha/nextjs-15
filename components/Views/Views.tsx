@@ -1,6 +1,7 @@
 import { client } from "@/sanity/lib/client";
 import { STARTUP_VIEWS_QUERY } from "@/sanity/lib/queries";
 import React from "react";
+import { useViews } from "./Views.hook";
 
 const Ping = () => {
   return (
@@ -16,16 +17,9 @@ const Ping = () => {
 };
 
 const Views = async ({ id }: { id: string }) => {
-  const { views: totalViews } = await client
-    .withConfig({
-      useCdn: false,
-    })
-    .fetch(STARTUP_VIEWS_QUERY, {
-      id,
-    });
-
-  const totalViewsString =
-    totalViews > 1 ? `${totalViews} views` : `${totalViews} view`;
+  const { totalViewsString } = await useViews({
+    id,
+  });
   return (
     <div className="view-container">
       <div className="absolute -top-2 right-2">
