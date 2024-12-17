@@ -1,4 +1,4 @@
-import { auth, signIn } from "@/auth";
+import { auth, signIn } from "@/auth/auth";
 import React from "react";
 import { redirect } from "next/navigation";
 import Image from "next/image";
@@ -7,9 +7,6 @@ import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 
 const Login = async () => {
-  const session = await auth();
-  if (session) redirect("/");
-
   return (
     <div className="h-screen w-screen flex items-center justify-center bg-gradient-to-b from-primary to-pink-600">
       <div className="flex flex-col items-center justify-center bg-white shadow-2xl rounded-lg p-8 gap-6 w-96 fade-in-bottom-150">

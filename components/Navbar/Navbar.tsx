@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { auth } from "@/auth";
+import { auth } from "@/auth/auth";
 
 import { useUser } from "./Navbar.hooks";
 import { LoggedUser, NotLoggedUser } from "./components";

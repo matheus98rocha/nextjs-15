@@ -11,7 +11,6 @@ import { z } from "zod";
 const StartupForm = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [pitch, setPitch] = useState("");
-
   const handleFormSubmit = async (prevState: any, formData: FormData) => {
     try {
       const formValues = {
@@ -22,10 +21,7 @@ const StartupForm = () => {
         pitch,
       };
 
-      await formSchema.parseAsync(formValues);
-
-      console.log(formValues);
-
+      const resp = await formSchema.parseAsync(formValues);
       // const result = await createIdea(prevState, formData, pitch);
 
       // console.log(result);
@@ -61,6 +57,7 @@ const StartupForm = () => {
           className="startup-form_input"
           required
           placeholder="Startup Name"
+          disabled={isPending}
         />
         {errors.title && <p className="startup-form_error">{errors.title}</p>}
       </div>
@@ -74,6 +71,7 @@ const StartupForm = () => {
           className="startup-form_textarea"
           required
           placeholder="Startup Description"
+          disabled={isPending}
         />
         {errors.description && (
           <p className="startup-form_error">{errors.description}</p>
@@ -89,6 +87,7 @@ const StartupForm = () => {
           className="startup-form_input"
           required
           placeholder="Startup Category (Tech, Health, Education, etc.)"
+          disabled={isPending}
         />
         {errors.category && <p>{errors.category}</p>}
       </div>
@@ -102,6 +101,7 @@ const StartupForm = () => {
           className="startup-form_input"
           required
           placeholder="Startup Image URL"
+          disabled={isPending}
         />
         {errors.link && <p className="startup-form_error">{errors.link}</p>}
       </div>
@@ -126,7 +126,7 @@ const StartupForm = () => {
             disallowedElements: ["style"],
           }}
         />
-        {errors.title && <p className="startup-form_error">{errors.title}</p>}
+        {errors.pitch && <p className="startup-form_error">{errors.pitch}</p>}
       </div>
       <Button
         type="submit"
