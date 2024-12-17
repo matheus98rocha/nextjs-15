@@ -1,16 +1,13 @@
-import { signIn } from "@/auth";
+"use client";
+import { useRouter } from "next/navigation";
 
 export const NotLoggedUser = () => {
+  const router = useRouter();
   return (
     <>
-      <form
-        action={async () => {
-          "use server";
-          await signIn("github");
-        }}
-      >
-        <button type="submit">Login</button>
-      </form>
+      <button type="button" onClick={() => router.push("/login")}>
+        Login
+      </button>
     </>
   );
 };
