@@ -5,61 +5,68 @@ import React, { useActionState, useState } from "react";
 import MDEditor from "@uiw/react-md-editor";
 import { Button } from "@/components/ui";
 import { Send } from "lucide-react";
-import { formSchema } from "../../validations/create";
-import { z } from "zod";
+import { startupSchema, StartupSchema } from "../../validations/create";
+
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useToast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
+import { createStartup } from "@/lib/actions";
+import { objectToFormData } from "@/lib/utils";
 
 const StartupForm = () => {
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [pitch, setPitch] = useState("");
-  const handleFormSubmit = async (prevState: any, formData: FormData) => {
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors, isSubmitting },
+  } = useForm<StartupSchema>({
+    resolver: zodResolver(startupSchema),
+  });
+  const { toast } = useToast();
+  const router = useRouter();
+
+  const onSubmit: SubmitHandler<StartupSchema> = async (data) => {
     try {
-      const formValues = {
-        title: formData.get("title") as string,
-        description: formData.get("description") as string,
-        category: formData.get("category") as string,
-        link: formData.get("link") as string,
-        pitch,
-      };
+      // Converter os dados do formulário para FormData
+      const formData = objectToFormData(data);
 
-      const resp = await formSchema.parseAsync(formValues);
-      // const result = await createIdea(prevState, formData, pitch);
-
-      // console.log(result);
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        const fieldError = error.flatten().fieldErrors;
-        setErrors(fieldError as unknown as Record<string, string>);
-        return { ...prevState, error: "Validation failed", status: "ERROR" };
+      // Chamada à API com FormData
+      const response = await createStartup(formData);
+      if (response.status === "SUCCESS") {
+        toast({
+          variant: "default",
+          title: "Success",
+          description: "Your startup has been submitted successfully.",
+        });
+        console.log(response);
+        router.push(`/startup/${response._id}`);
       }
-
-      return {
-        ...prevState,
-        error: "An unexpected error occurred",
-        status: "ERROR",
-      };
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+      });
     }
   };
-
-  const [state, formAction, isPending] = useActionState(handleFormSubmit, {
-    error: "",
-    status: "INITIAL",
-  });
-
   return (
-    <form action={formAction} className="startup-form">
+    <form onSubmit={handleSubmit(onSubmit)} className="startup-form">
       <div>
         <label htmlFor="title" className="startup-form_label">
           Title
         </label>
         <Input
           id={"title"}
-          name="title"
+          {...register("title")}
           className="startup-form_input"
           required
           placeholder="Startup Name"
-          disabled={isPending}
+          disabled={isSubmitting}
         />
-        {errors.title && <p className="startup-form_error">{errors.title}</p>}
+        {errors.title?.message && (
+          <p className="startup-form_error">{errors.title?.message}</p>
+        )}
       </div>
       <div>
         <label htmlFor="description" className="startup-form_label">
@@ -67,14 +74,14 @@ const StartupForm = () => {
         </label>
         <Textarea
           id={"description"}
-          name="description"
+          {...register("description")}
           className="startup-form_textarea"
           required
           placeholder="Startup Description"
-          disabled={isPending}
+          disabled={isSubmitting}
         />
-        {errors.description && (
-          <p className="startup-form_error">{errors.description}</p>
+        {errors.description?.message && (
+          <p className="startup-form_error">{errors.description?.message}</p>
         )}
       </div>
       <div>
@@ -83,13 +90,13 @@ const StartupForm = () => {
         </label>
         <Input
           id={"category"}
-          name="category"
+          {...register("category")}
           className="startup-form_input"
           required
           placeholder="Startup Category (Tech, Health, Education, etc.)"
-          disabled={isPending}
+          disabled={isSubmitting}
         />
-        {errors.category && <p>{errors.category}</p>}
+        {errors.category?.message && <p>{errors.category?.message}</p>}
       </div>
       <div>
         <label htmlFor="link" className="startup-form_label">
@@ -97,43 +104,54 @@ const StartupForm = () => {
         </label>
         <Input
           id={"link"}
-          name="link"
+          {...register("link")}
           className="startup-form_input"
           required
           placeholder="Startup Image URL"
-          disabled={isPending}
+          disabled={isSubmitting}
         />
-        {errors.link && <p className="startup-form_error">{errors.link}</p>}
+        {errors.link?.message && (
+          <p className="startup-form_error">{errors.link?.message}</p>
+        )}
       </div>
       <div data-color-mode="light">
         <label htmlFor="pitch" className="startup-form_label">
           Title
         </label>
-        <MDEditor
-          value={pitch}
-          onChange={(value) => setPitch(value as string)}
-          preview="edit"
-          height={300}
-          style={{
-            borderRadius: "20",
-            overflow: "hidden",
-          }}
-          textareaProps={{
-            placeholder:
-              "Briefly describe your idea and what problem it solves",
-          }}
-          previewOptions={{
-            disallowedElements: ["style"],
-          }}
+        <Controller
+          name="pitch"
+          control={control}
+          defaultValue=""
+          render={({ field }) => (
+            <MDEditor
+              value={field.value}
+              onChange={(value) => field.onChange(value)}
+              preview="edit"
+              height={300}
+              style={{
+                borderRadius: "20",
+                overflow: "hidden",
+              }}
+              textareaProps={{
+                placeholder:
+                  "Briefly describe your idea and what problem it solves",
+              }}
+              previewOptions={{
+                disallowedElements: ["style"],
+              }}
+            />
+          )}
         />
-        {errors.pitch && <p className="startup-form_error">{errors.pitch}</p>}
+        {errors.pitch?.message && (
+          <p className="startup-form_error">{errors.pitch?.message}</p>
+        )}
       </div>
       <Button
         type="submit"
         className="startup-form_btn text-white-100"
-        disabled={isPending}
+        disabled={isSubmitting}
       >
-        {isPending ? "Submitting" : "Submit Your Pitch"}
+        {isSubmitting ? "Submitting" : "Submit Your Pitch"}
         <Send className="size-6 ml-2" />
       </Button>
     </form>

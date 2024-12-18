@@ -12,3 +12,21 @@ export function formatDate(date: string) {
     year: "numeric",
   });
 }
+
+export function parseServerActionResponse<T>(response: T) {
+  return JSON.parse(JSON.stringify(response));
+}
+
+export function objectToFormData<T extends Record<string, any>>(
+  data: T
+): FormData {
+  const formData = new FormData();
+  Object.entries(data).forEach(([key, value]) => {
+    if (value instanceof File || value instanceof Blob) {
+      formData.append(key, value); // Para arquivos ou blobs
+    } else {
+      formData.append(key, value.toString()); // Para outros valores
+    }
+  });
+  return formData;
+}
