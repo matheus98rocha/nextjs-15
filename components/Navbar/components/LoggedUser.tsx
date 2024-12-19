@@ -27,9 +27,6 @@ export const LoggedUser = ({ user }: LoggedUserProps) => {
       <Link href="/startup/create">
         <span>Create</span>
       </Link>
-
-      {/* <Link href={`/user/${user.id}`}>
-      </Link> */}
       <Popover>
         <PopoverContent className="bg-white flex items-center justify-center flex-col gap-4 px-0">
           <Link href={`/user/${user.id}`} className={popoverItem}>
